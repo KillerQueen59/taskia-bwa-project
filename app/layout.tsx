@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
+import SideBar from "@/components/Sidebar/Sidebar";
+import { Poppins } from "next/font/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"], // Add the required font weights
 });
 
 export const metadata: Metadata = {
@@ -24,11 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={poppins.className}>
+      <body className={`font-poppins flex h-full antialiased bg-primary-100`}>
+        <SideBar />
+        <div className="w-full max-h-screen bg-primary-50 rounded-l-[60px] overflow-auto p-[50px]">
+          {children}
+        </div>
       </body>
     </html>
   );
